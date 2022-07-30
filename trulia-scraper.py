@@ -18,5 +18,30 @@ req_headers = {
 
 # scrapping each house listing's weblink
 def get_house_links(base_link, num_pages):
+    
     global req_headers
     link_list=[]
+    
+    
+    #starting a request session
+    with requests.Session() as s:
+        
+        #loop through all pages
+        for i in range(1,num_pages+1):
+            
+            #add desired page number to the base http link
+            link=base_link+str(i)+"_p/"
+            
+            #making the http request
+            with requests.Session() as s:
+                data=s.get(link,headers=req_headers)
+            
+            #using bs4 to change the output from the request to a soup object, easily analysed
+            soup=BeautifulSoup(data.content,'html.parser')
+            
+            #find all of the property card tags in HTML doc
+            house_link=soup.find_all("a",class_=re.compile('PropertyCard'))
+
+            #extract the link string from  property card and add to remainder of the HTTP request
+            for n in [item['href'] for item in house_link]:
+                link_list=link_list+["https://www.trulia.com/"+n]

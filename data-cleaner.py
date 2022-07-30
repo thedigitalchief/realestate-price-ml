@@ -11,3 +11,4 @@ conn = sqlite3.connect(
     '/Users/dylannguyen/Documents/Coding/trulia_house_data.db')
 
 houses_dataframe = pd.read_sql_query("SELECT * FROM trulia_house_raw_data", conn)
+
