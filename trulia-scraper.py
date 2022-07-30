@@ -124,3 +124,16 @@ def extract_link_data(link_list):
             building_sqft_list.append(building_area)
     
             lot_area_list.append(lot_area)
+            
+            
+            #Randomly vary the time and header every 4 requests to seem less bot-like
+            if i%4==0:
+                r=np.random.randint(0,3)
+                user_agent=user_agent_list[r]
+                req_headers = {
+                    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+                    'accept-encoding': 'gzip, deflate, br',
+                    'accept-language': 'en-US,en;q=0.8',
+                    'upgrade-insecure-requests': '1',
+                    'user-agent': user_agent
+                    }
