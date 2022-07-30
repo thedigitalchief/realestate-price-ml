@@ -25,7 +25,6 @@ def get_house_links(base_link, num_pages):
     global req_headers
     link_list=[]
     
-    
     #starting a request session
     with requests.Session() as s:
         
@@ -64,7 +63,6 @@ def get_house_links(base_link, num_pages):
                 
                 time.sleep(np.random.randint(60,180))
             
-            
             #randomly vary the time in between each request
             time.sleep(np.random.randint(20,30))
             
@@ -97,3 +95,11 @@ def extract_link_data(link_list):
             #get HTML doc from house listing
             data=s.get(link,headers=req_headers)
             soup=BeautifulSoup(data.content,'html.parser')
+            
+            #use our extraction functions (defined below) to extract information from links and add to lists
+            price_list.append(get_price(soup))
+            address_list.append(get_address(soup))
+            zip_list.append(get_zip(soup))
+            beds_list.append(get_beds(soup))
+            baths_list.append(get_baths(soup))
+            year_built_list.append(get_year_built(soup))
