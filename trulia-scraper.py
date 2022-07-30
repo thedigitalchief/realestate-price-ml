@@ -137,3 +137,10 @@ def extract_link_data(link_list):
                     'upgrade-insecure-requests': '1',
                     'user-agent': user_agent
                     }
+                
+                time.sleep(np.random.randint(60,180))
+            
+            #randomly vary the time in between requests to seem less robot-like
+            time.sleep(np.random.randint(20,30))
+            
+            print(i)
