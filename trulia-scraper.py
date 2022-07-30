@@ -96,10 +96,31 @@ def extract_link_data(link_list):
             data=s.get(link,headers=req_headers)
             soup=BeautifulSoup(data.content,'html.parser')
             
-            #use our extraction functions (defined below) to extract information from links and add to lists
+            #Uncomment to save HTML data to directory to save progress in case program stops 
+            #do to a "captcha" bot on the site
+            '''
+            with open("C:/Users/dakot/Desktop/DataScience/Project Scrap work/trulia_project/raw_page_html/"+str(i)+".html", "w") as f:
+                f.write(str(data.content))
+            '''
+            
+            #use our extraction functions below to scrape information from links and add to lists from above
             price_list.append(get_price(soup))
             address_list.append(get_address(soup))
             zip_list.append(get_zip(soup))
             beds_list.append(get_beds(soup))
             baths_list.append(get_baths(soup))
             year_built_list.append(get_year_built(soup))
+            
+            
+            #2 different spots on the site where building and lot area are listed, so trying to scrape both
+            building_area=get_building_area(soup)
+            if pd.isnull(building_area):
+                building_area=get_living_area(soup)
+            
+            lot_area=get_lot_area(soup)        
+            if pd.isnull(lot_area):
+                lot_area=get_lot_area_alt(soup)
+                
+            building_sqft_list.append(building_area)
+    
+            lot_area_list.append(lot_area)
