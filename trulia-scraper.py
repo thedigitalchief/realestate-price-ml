@@ -58,3 +58,11 @@ def get_house_links(base_link, num_pages):
                     'upgrade-insecure-requests': '1',
                     'user-agent': user_agent
                     }
+                
+                time.sleep(np.random.randint(60,180))
+            
+            
+            #randomly vary the time in between each request
+            time.sleep(np.random.randint(20,30))
+            
+    return link_list
