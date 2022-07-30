@@ -45,3 +45,16 @@ def get_house_links(base_link, num_pages):
             #extract the link string from  property card and add to remainder of the HTTP request
             for n in [item['href'] for item in house_link]:
                 link_list=link_list+["https://www.trulia.com/"+n]
+                
+                
+            #random vary time and the header in between every 4 requests so its more human
+            if i%4==0:
+                r=np.random.randint(0,3)
+                user_agent=user_agent_list[r]
+                req_headers = {
+                    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+                    'accept-encoding': 'gzip, deflate, br',
+                    'accept-language': 'en-US,en;q=0.8',
+                    'upgrade-insecure-requests': '1',
+                    'user-agent': user_agent
+                    }
