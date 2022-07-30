@@ -73,11 +73,9 @@ def get_house_links(base_link, num_pages):
 
 
 def extract_link_data(link_list): 
-    """Function to take in list of links for trulia house listings and return dataframe of data for all links
-
-    :type link_list: str - list of links for each realestate listing retrieved by the search
-    :rtype: obj (pandas df) - Data from trulia links
-    """
+    #Function to take in list of links for trulia house listings and return dataframe of data for all links
+    #type link_list: str - list of links for each realestate listing retrieved by the search
+    #rtype: obj (pandas df) - Data from trulia links
 
     global req_headers
     
@@ -90,3 +88,12 @@ def extract_link_data(link_list):
     year_built_list=[]
     lot_area_list=[]
     
+     #starts a requests session
+    with requests.Session() as s:
+        
+        for i in range(len(link_list)):
+            link=link_list[i]
+            
+            #get HTML doc from house listing
+            data=s.get(link,headers=req_headers)
+            soup=BeautifulSoup(data.content,'html.parser')
