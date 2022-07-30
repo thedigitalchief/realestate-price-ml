@@ -144,3 +144,8 @@ def extract_link_data(link_list):
             time.sleep(np.random.randint(20,30))
             
             print(i)
+            
+            
+    #creating a dataframe with all of scraped data
+    dataframe=pd.DataFrame({'price':price_list,'address':address_list,'zip':zip_list,'num_bedrooms':beds_list,'num_baths':baths_list,'building_sqft':building_sqft_list,'year_built':year_built_list,'lot_area':lot_area_list})
+    return dataframe
