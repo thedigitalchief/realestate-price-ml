@@ -14,3 +14,9 @@ req_headers = {
     'upgrade-insecure-requests': '1',
     'user-agent': 'Chrome/61.0.3163.100 Safari/537.36'
 }
+
+
+# scrapping each house listing's weblink
+def get_house_links(base_link, num_pages):
+    global req_headers
+    link_list=[]
