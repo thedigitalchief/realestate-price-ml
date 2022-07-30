@@ -15,8 +15,11 @@ req_headers = {
     'user-agent': 'Chrome/61.0.3163.100 Safari/537.36'
 }
 
+user_agent_list=['Chrome/61.0.3163.100 Safari/537.36','AppleWebKit/537.36 (KHTML, like Gecko)','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36']
 
-# scrapping each house listing's weblink
+
+
+# scraping each house listing's weblink
 def get_house_links(base_link, num_pages):
     
     global req_headers
