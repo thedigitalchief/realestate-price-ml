@@ -69,3 +69,24 @@ def get_house_links(base_link, num_pages):
             time.sleep(np.random.randint(20,30))
             
     return link_list
+
+
+
+def extract_link_data(link_list): 
+    """Function to take in list of links for trulia house listings and return dataframe of data for all links
+
+    :type link_list: str - list of links for each realestate listing retrieved by the search
+    :rtype: obj (pandas df) - Data from trulia links
+    """
+
+    global req_headers
+    
+    price_list=[]
+    address_list=[]
+    zip_list=[]
+    beds_list=[]
+    baths_list=[]
+    building_sqft_list=[]
+    year_built_list=[]
+    lot_area_list=[]
+    
