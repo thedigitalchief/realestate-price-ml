@@ -204,3 +204,17 @@ def get_beds(soup):
         return num_beds
     except:
         return np.nan
+
+
+def get_baths(soup):
+    """
+    :type soup: obj - beautiful soup object for a house listing on trulia
+    :rtype: int - number of bathrooms
+    """
+
+    try:
+        num_baths = float(([item.text for item in soup.find_all(
+        ) if "data-testid" in item.attrs and item["data-testid"] == 'home-summary-size-bathrooms'][0]).lower().replace('baths', ''))
+        return num_baths
+    except:
+        return np.nan
