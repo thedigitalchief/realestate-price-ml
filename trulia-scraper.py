@@ -328,3 +328,16 @@ def get_living_area(soup):
         return float(living_area)
     except:
         return np.nan
+
+
+#main trulia web scraper function
+def web_scraper(base_link, num_pages):
+    """ Main callable function 
+    :type base_link: str - Link for a trulia.com search
+    :type num_pages: int - The number of pages retirieved by the search (pages of listings that the user wants to scrape)
+    :rtype: obj (pandas dataframe) - dataframe of house listing data from a trulia search
+    """
+
+    link_list = get_house_links(base_link, num_pages)
+    dataframe = extract_link_data(link_list)
+    return dataframe
