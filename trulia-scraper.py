@@ -176,3 +176,31 @@ def get_address(soup):
         return address
     except:
         return 'None'
+
+
+def get_zip(soup):
+    """
+    :type soup: obj - beautiful soup object for a house listing on trulia
+    :rtype: str - zipcode for a house
+    """
+
+    try:
+        zip = str([item.text for item in soup.find_all(
+        ) if "data-testid" in item.attrs and item["data-testid"] == 'home-details-summary-city-state'][0])
+        return (re.sub('\D', '', zip))
+    except:
+        return 'None'
+
+
+def get_beds(soup):
+    """
+    :type soup: obj - beautiful soup object for a house listing on trulia
+    :rtype: int - number of bedrooms
+    """
+
+    try:
+        num_beds = float(([item.text for item in soup.find_all(
+        ) if "data-testid" in item.attrs and item["data-testid"] == 'home-summary-size-bedrooms'][0]).lower().replace('beds', ''))
+        return num_beds
+    except:
+        return np.nan
