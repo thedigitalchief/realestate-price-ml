@@ -245,3 +245,65 @@ def get_year_built(soup):
         return year_built
     except:
         return np.nan
+
+
+def get_lot_area(soup):
+    """
+    :type soup: obj - beautiful soup object for a house listing on trulia
+    :rtype: int - lot area for a listing (acres)
+    """
+
+    try:
+        table_text = [item.text for item in soup.find_all(
+        ) if "data-testid" in item.attrs and item["data-testid"] == 'structured-amenities-table-category']
+        for item in table_text:
+            item = item.lower()
+
+            if 'lot area' in item:
+                if 'feet' in item:
+                    lot_sqft = item.replace('feet', '').replace('square', '').replace(
+                        'area', '').replace('lot', '').replace('information', '').replace(':', '')
+                    lot_area = float(lot_sqft)/43560
+                if 'acres' in item:
+                    lot_area = item.replace('acres', '').replace('area', '').replace(
+                        'lot', '').replace('information', '').replace(':', '')
+                    lot_area = float(lot_area)
+
+        return lot_area
+    except:
+        return np.nan
+
+
+def get_lot_area_alt(soup):
+    """ Searches a different location in the HTML for the lot area (compared to the function above)
+    :type soup: obj - beautiful soup object for a house listing on trulia
+    :rtype: int - lot area for a listing (acres)
+    """
+
+    try:
+        lot_size = ([item.text for item in soup.find_all() if "data-testid" in item.attrs and item["data-testid"] ==
+                    'home-summary-size-lotsize'][0].replace('(', '').replace(')', '').replace('on', '').replace('acre', '').replace('s', ''))
+        return float(lot_size)
+    #*43560
+    except:
+        return np.nan
+
+
+def get_building_area(soup):
+    """ 
+    :type soup: obj - beautiful soup object for a house listing on trulia
+    :rtype: int - building area (sq feet)
+    """
+
+    try:
+        table_text = [item.text for item in soup.find_all(
+        ) if "data-testid" in item.attrs and item["data-testid"] == 'structured-amenities-table-category']
+        for item in table_text:
+            item = item.lower()
+            if 'building area' in item:
+                house_sqft = item.replace('building', '').replace('area', '').replace(
+                    ':', '').replace('square', '').replace('feet', '')
+                house_sqft = float(house_sqft)
+        return house_sqft
+    except:
+        return np.nan
