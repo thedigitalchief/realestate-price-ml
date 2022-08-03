@@ -149,3 +149,16 @@ def extract_link_data(link_list):
     #creating a dataframe with all of scraped data
     dataframe=pd.DataFrame({'price':price_list,'address':address_list,'zip':zip_list,'num_bedrooms':beds_list,'num_baths':baths_list,'building_sqft':building_sqft_list,'year_built':year_built_list,'lot_area':lot_area_list})
     return dataframe
+
+
+def get_price(soup):
+    """
+    :type soup: obj - beautiful soup object for a house listing on trulia
+    :rtype: int - House price
+    """
+    
+    try:
+        price=float([item.text for item in soup.find_all() if "data-testid" in item.attrs and item["data-testid"]=='home-details-price-detail'][0].replace('$','').replace(',',''))    
+        return price
+    except:
+        return np.nan
