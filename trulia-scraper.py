@@ -218,3 +218,30 @@ def get_baths(soup):
         return num_baths
     except:
         return np.nan
+
+
+def get_year_built(soup):
+    """
+    :type soup: obj - beautiful soup object for a house listing on trulia
+    :rtype: int - year the house was built
+    """
+
+    try:
+        table_text = [item.text for item in soup.find_all(
+        ) if "data-testid" in item.attrs and item["data-testid"] == 'structured-amenities-table-category']
+        for item in table_text:
+            item = item.lower()
+
+            if 'year built' in item:
+                i = item.index('year built')
+                year_built = item[i:i+100]
+                possible_years = list(range(1900, 2022))
+                possible_years = [str(year) for year in possible_years]
+                try:
+                    year_built = int(
+                        [year for year in possible_years if year in year_built][0])
+                except:
+                    year_built = np.nan
+        return year_built
+    except:
+        return np.nan
