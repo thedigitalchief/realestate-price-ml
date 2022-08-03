@@ -162,3 +162,17 @@ def get_price(soup):
         return price
     except:
         return np.nan
+    
+    
+def get_address(soup):
+    """
+    :type soup: obj - beautiful soup object for a house listing on trulia
+    :rtype: str - Address for a house listing
+    """
+
+    try:
+        address = str([item.text for item in soup.find_all(
+        ) if "data-testid" in item.attrs and item["data-testid"] == 'home-details-summary-address'][0])
+        return address
+    except:
+        return 'None'
