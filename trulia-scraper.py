@@ -307,3 +307,24 @@ def get_building_area(soup):
         return house_sqft
     except:
         return np.nan
+
+
+def get_living_area(soup):
+    """ Searches a different location in the HTML for the building area/living area (compared to the function above)
+    :type soup: obj - beautiful soup object for a house listing on trulia
+    :rtype: int - building area (sq feet)
+    """
+
+    try:
+        table_text = [item.text for item in soup.find_all(
+        ) if "data-testid" in item.attrs and item["data-testid"] == 'structured-amenities-table-category']
+
+        for item in table_text:
+            item = item.lower()
+            if 'living area' in item:
+                i = item.index('living area')
+                living_area = item[i:i+100]
+                living_area = re.sub('\D', '', living_area)
+        return float(living_area)
+    except:
+        return np.nan
