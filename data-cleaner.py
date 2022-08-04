@@ -27,3 +27,6 @@ houses_dataframe['house_age'] = houses_dataframe['year_built'].apply(
 
 #rescale price to millions
 houses_dataframe['price']=houses_dataframe['price'].apply(lambda x: x/(1e6))
+
+#rescale sqft to thousands of sqft
+houses_dataframe['building_sqft']=houses_dataframe['building_sqft'].apply(lambda x: x/(1000))
