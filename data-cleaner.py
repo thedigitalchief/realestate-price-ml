@@ -63,3 +63,11 @@ houses_dataframe=houses_dataframe[houses_dataframe['price']<10]
 
 #notifies if sqft is missing for future reference
 houses_dataframe['building_sqft'+'_was_missing']=houses_dataframe['building_sqft'].isnull()
+
+
+#congregating missing values & calculating sum
+missing_values_count = houses_dataframe.isnull().sum()
+
+print('___CLEANED DATA SUMMARY____')
+print(missing_values_count)
+print("number of samples: "+str(len(houses_dataframe)))
