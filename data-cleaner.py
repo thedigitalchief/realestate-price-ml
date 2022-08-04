@@ -24,13 +24,34 @@ print("number of samples: "+str(len(houses_dataframe)))
 houses_dataframe['house_age'] = houses_dataframe['year_built'].apply(
     lambda x: 2022-x)
 
-#rescale price to millions
+
+#Rescaling numerical data values
+#rescale home price to millions
 houses_dataframe['price']=houses_dataframe['price'].apply(lambda x: x/(1e6))
 
-#rescale sqft to thousands of sqft
+#rescale squarefeet to thousands of sqft
 houses_dataframe['building_sqft']=houses_dataframe['building_sqft'].apply(lambda x: x/(1000))
 
-#Extract garage boolean from description
+
+#Extracting boolean values from descriptions:
+#garage boolean
 houses_dataframe['has_garage']=houses_dataframe['home_description'].apply(lambda x: 1 if 'garage' in x.lower() else 0)
 
+#ocean views boolean 
+houses_dataframe['has_ocean_views'] = houses_dataframe['home_description'].apply(
+    lambda x: 1 if 'ocean view' in x.lower() else 0)
 
+#mountian views boolean 
+houses_dataframe['has_mountain_views'] = houses_dataframe['home_description'].apply(
+    lambda x: 1 if 'mountain view' in x.lower() else 0)
+
+# Extract pool boolean from description
+houses_dataframe['has_pool']=houses_dataframe['home_description'].apply(lambda x: 1 if 'pool' in x.lower() else 0)
+
+# Extract upstair boolean from description
+houses_dataframe['has_upstairs']=houses_dataframe['home_description'].apply(lambda x: 1 if ('upstair' in x.lower() or 'upstairs' in x.lower()) else 0)
+
+
+#eliminate rows containing missing values of price, num_baths, lot area, year built
+houses_dataframe['has_IV']=houses_dataframe['home_description'].apply(lambda x: 1 if 'isla vista' in x.lower() else 0)
+houses_dataframe.dropna(subset=['price','num_baths','lot_area','year_built'],inplace=True)
