@@ -23,3 +23,7 @@ print("number of samples: "+str(len(houses_dataframe)))
 #converting "year built" value into "house age"
 houses_dataframe['house_age'] = houses_dataframe['year_built'].apply(
     lambda x: 2022-x)
+
+
+#rescale price to millions
+houses_dataframe['price']=houses_dataframe['price'].apply(lambda x: x/(1e6))
