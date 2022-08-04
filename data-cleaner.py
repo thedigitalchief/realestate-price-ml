@@ -55,3 +55,7 @@ houses_dataframe['has_upstairs']=houses_dataframe['home_description'].apply(lamb
 #eliminate rows containing missing values of price, num_baths, lot area, year built
 houses_dataframe['has_IV']=houses_dataframe['home_description'].apply(lambda x: 1 if 'isla vista' in x.lower() else 0)
 houses_dataframe.dropna(subset=['price','num_baths','lot_area','year_built'],inplace=True)
+
+
+#eliminate rows containing outlier prices (above 10 million)
+houses_dataframe=houses_dataframe[houses_dataframe['price']<10]
