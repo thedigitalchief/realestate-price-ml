@@ -59,3 +59,7 @@ houses_dataframe.dropna(subset=['price','num_baths','lot_area','year_built'],inp
 
 #eliminate rows containing outlier prices (above 10 million)
 houses_dataframe=houses_dataframe[houses_dataframe['price']<10]
+
+
+#notifies if sqft is missing for future reference
+houses_dataframe['building_sqft'+'_was_missing']=houses_dataframe['building_sqft'].isnull()
