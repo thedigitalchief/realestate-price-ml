@@ -48,3 +48,5 @@ houses_dataframe['has_mountain_views'] = houses_dataframe['home_description'].ap
 # Extract pool boolean from description
 houses_dataframe['has_pool']=houses_dataframe['home_description'].apply(lambda x: 1 if 'pool' in x.lower() else 0)
 
+# Extract upstair boolean from description
+houses_dataframe['has_upstairs']=houses_dataframe['home_description'].apply(lambda x: 1 if ('upstair' in x.lower() or 'upstairs' in x.lower()) else 0)
