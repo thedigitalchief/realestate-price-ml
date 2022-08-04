@@ -50,3 +50,7 @@ houses_dataframe['has_pool']=houses_dataframe['home_description'].apply(lambda x
 
 # Extract upstair boolean from description
 houses_dataframe['has_upstairs']=houses_dataframe['home_description'].apply(lambda x: 1 if ('upstair' in x.lower() or 'upstairs' in x.lower()) else 0)
+
+
+#eliminate rows containing missing values of price, num_baths, lot area, year built
+houses_dataframe['has_IV']=houses_dataframe['home_description'].apply(lambda x: 1 if 'isla vista' in x.lower() else 0)
