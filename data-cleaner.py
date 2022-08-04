@@ -71,3 +71,7 @@ missing_values_count = houses_dataframe.isnull().sum()
 print('___CLEANED DATA SUMMARY____')
 print(missing_values_count)
 print("number of samples: "+str(len(houses_dataframe)))
+
+
+#Storing cleaned data in a new table: my SQLite database
+houses_dataframe.to_sql(name='trulia_house_SB_data_cleaned', con=conn, schema='trulia_sb_house_data.db', if_exists='replace')
