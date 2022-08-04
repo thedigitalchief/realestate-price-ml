@@ -12,3 +12,11 @@ conn = sqlite3.connect(
 
 houses_dataframe = pd.read_sql_query("SELECT * FROM trulia_house_raw_data", conn)
 
+
+missing_values_count = houses_dataframe.isnull().sum()
+
+print('___RAW DATA SUMMARY____')
+
+print(missing_values_count)
+
+print("number of samples: "+str(len(houses_dataframe)))
