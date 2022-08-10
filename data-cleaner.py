@@ -5,11 +5,25 @@ import regex as re
 from mlxtend.preprocessing import minmax_scaling
 
 
+#Call trulia web scraper to scrape data from trulia link and save to SQLite .db file
+#This takes ~1-1.5 minutes per listing
+'''
+import trulia_web_scraper as tws
+base_link="http://www.trulia.com/sold/Santa_Barbara,CA/SINGLE-FAMILY_HOME_type/"
+num_pages=30
 
-#takes 1-2 min to process per lisiting
-#query the raw trulia house data from SQLite database
-conn = sqlite3.connect('/Users/dylannguyen/Documents/Coding/trulia_house_data.db')
-houses_dataframe = pd.read_sql_query("SELECT * FROM trulia_house_raw_data", conn)
+df=tws.web_scraper(base_link,num_pages)
+
+conn = sqlite3.connect('ENTER_FILE_PATH')
+df.to_sql(name='trulia_house_summary_data',con=conn,schema='raw_trulia_data.db',if_exists='replace') 
+'''
+
+#Query raw trulia house data from SQLite database
+
+conn = sqlite3.connect('trulia_sb_house_data.db')
+
+houses_dataframe = pd.read_sql_query(
+    "SELECT * FROM trulia_house_SB_raw_data", conn)
 
 
 #summarizing missing values
@@ -77,4 +91,4 @@ print("number of samples: "+str(len(houses_dataframe)))
 
 
 #storing the now cleaned data in a new table: my SQLite database
-houses_dataframe.to_sql(name='trulia_house_SB_data_cleaned', con=conn, schema='trulia_sb_house_data.db', if_exists='replace')
+houses_dataframe.to_sql(name='trulia_house_SB_data_cleaned', con=conn, schema='house-data.db', if_exists='replace')
