@@ -8,7 +8,7 @@ from mlxtend.preprocessing import minmax_scaling
 
 #takes 1-2 min to process per lisiting
 #query the raw trulia house data from SQLite database
-conn = sqlite3.connect('/Users/dylannguyen/Documents/Coding/trulia_house_data.db')
+conn = sqlite3.connect('/Users/dylannguyen/Documents/Coding/house-data.db')
 houses_dataframe = pd.read_sql_query("SELECT * FROM trulia_house_raw_data", conn)
 
 
@@ -77,4 +77,4 @@ print("number of samples: "+str(len(houses_dataframe)))
 
 
 #storing the now cleaned data in a new table: my SQLite database
-houses_dataframe.to_sql(name='trulia_house_SB_data_cleaned', con=conn, schema='trulia_sb_house_data.db', if_exists='replace')
+houses_dataframe.to_sql(name='trulia_house_SB_data_cleaned', con=conn, schema='house-data.db', if_exists='replace')
